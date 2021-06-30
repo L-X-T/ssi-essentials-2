@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Flight } from '../../entities/flight';
 import { FlightService } from './flight.service';
@@ -10,7 +10,7 @@ import { share, takeUntil } from 'rxjs/operators';
   templateUrl: './flight-search.component.html',
   styleUrls: ['./flight-search.component.css']
 })
-export class FlightSearchComponent implements OnDestroy {
+export class FlightSearchComponent implements OnInit, OnDestroy {
   from = 'Graz';
   to = 'Hamburg';
 
@@ -24,7 +24,27 @@ export class FlightSearchComponent implements OnDestroy {
 
   onDestroySubject = new Subject<void>();
 
+  basket: { [id: number]: boolean } = {
+    3: true,
+    5: true
+  };
+
   constructor(private flightService: FlightService) {}
+
+  ngOnInit(): void {
+    if (this.from && this.to) {
+      this.search();
+    }
+  }
+
+  ngOnDestroy(): void {
+    // 4. my unsubscribe
+    // this.flightsSubscription?.unsubscribe();
+
+    // const my$ = this.onDestroySubject.asObservable();
+    this.onDestroySubject.next();
+    this.onDestroySubject.complete();
+  }
 
   search(): void {
     // 1. my observable
@@ -41,15 +61,6 @@ export class FlightSearchComponent implements OnDestroy {
     // this.flightsSubscription = this.flights$.subscribe(flightsObserver);
 
     this.flights$.pipe(takeUntil(this.onDestroySubject)).subscribe(flightsObserver);
-  }
-
-  ngOnDestroy(): void {
-    // 4. my unsubscribe
-    // this.flightsSubscription?.unsubscribe();
-
-    // const my$ = this.onDestroySubject.asObservable();
-    this.onDestroySubject.next();
-    this.onDestroySubject.complete();
   }
 
   select(f: Flight): void {
