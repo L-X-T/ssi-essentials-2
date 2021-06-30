@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 
-import { Flight } from '../entities/flight';
+import { Flight } from '../../entities/flight';
 import { FlightService } from './flight.service';
 import { Observable, Observer, Subject, Subscription } from 'rxjs';
 import { share, takeUntil } from 'rxjs/operators';
