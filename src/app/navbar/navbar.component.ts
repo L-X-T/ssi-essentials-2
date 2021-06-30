@@ -7,6 +7,9 @@ import { Component } from '@angular/core';
 export class NavbarComponent {
   private sidebarVisible = false;
 
+  /**
+   *
+   */
   sidebarToggle(): void {
     const body = document.getElementsByTagName('body')[0];
 
