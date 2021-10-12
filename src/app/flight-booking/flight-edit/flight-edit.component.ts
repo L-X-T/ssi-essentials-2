@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { Flight } from '../../entities/flight';
 import { FlightService } from '../flight-search/flight.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { validateCity } from '../shared/validation/city-validator';
 
 @Component({
   selector: 'flight-edit',
@@ -20,7 +21,7 @@ export class FlightEditComponent implements OnChanges, OnInit, OnDestroy {
     from: [
       '',
       {
-        validators: [Validators.required, Validators.minLength(3), Validators.maxLength(15)],
+        validators: [Validators.required, Validators.minLength(3), Validators.maxLength(15), validateCity],
         updateOn: 'blur'
       },
       []
@@ -28,7 +29,7 @@ export class FlightEditComponent implements OnChanges, OnInit, OnDestroy {
     to: [
       '',
       {
-        validators: [Validators.required, Validators.minLength(3), Validators.maxLength(15)],
+        validators: [Validators.required, Validators.minLength(3), Validators.maxLength(15), validateCity],
         updateOn: 'blur'
       },
       []
