@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 
@@ -14,21 +14,19 @@ import { FlightService } from '../flight-search/flight.service';
 export class FlightEditComponent implements OnChanges, OnInit, OnDestroy {
   @Input() flight: Flight | undefined | null;
 
-  editForm: FormGroup;
+  editForm: FormGroup = this.fb.group({
+    id: [0, Validators.required],
+    from: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
+    to: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
+    date: ['', [Validators.required, Validators.minLength(33), Validators.maxLength(33)]]
+  });
 
   message = '';
 
   private valueChangesSubscription: Subscription | undefined;
   private saveFlightSubscription: Subscription | undefined;
 
-  constructor(private fb: FormBuilder, private flightService: FlightService) {
-    this.editForm = this.fb.group({
-      id: [0],
-      from: [''],
-      to: [''],
-      date: ['']
-    });
-  }
+  constructor(private fb: FormBuilder, private flightService: FlightService) {}
 
   ngOnChanges(): void {
     if (this.flight) {

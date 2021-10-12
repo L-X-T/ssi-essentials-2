@@ -9,15 +9,27 @@
     <input formControlName="date" class="form-control">
   </div>
 
+  <flight-validation-errors fieldLabel="Date"
+                            [errors]="editForm.controls.date.errors">
+  </flight-validation-errors>
+
   <div class="form-group">
     <label>From:</label>
     <input formControlName="from" class="form-control">
   </div>
 
+  <flight-validation-errors fieldLabel="From"
+                            [errors]="editForm.controls.from.errors">
+  </flight-validation-errors>
+
   <div class="form-group">
     <label>To:</label>
     <input formControlName="to" class="form-control">
   </div>
+
+  <flight-validation-errors fieldLabel="To"
+                            [errors]="editForm.controls.to.errors">
+  </flight-validation-errors>
 
   <div class="form-group">
     <button (click)="save()" class="btn btn-default">Save</button>
