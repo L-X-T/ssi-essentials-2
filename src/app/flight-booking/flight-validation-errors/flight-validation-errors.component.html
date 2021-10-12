@@ -8,5 +8,6 @@
   <div *ngIf="errors.maxlength">{{ fieldLabel }} maxlength is {{ errors.maxlength.requiredLength }}.</div>
 
   <div *ngIf="errors.pattern">{{ fieldLabel }} has invalid input.</div>
-</ng-container>
 
+  <div *ngIf="errors.city"> {{ fieldLabel }} is {{ errors.city.actualCity }} but should be a city of {{ errors.city.validCities }} </div>
+</ng-container>
