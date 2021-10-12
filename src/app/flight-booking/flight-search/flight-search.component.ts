@@ -12,7 +12,7 @@ import { share, takeUntil } from 'rxjs/operators';
   styleUrls: ['./flight-search.component.css']
 })
 export class FlightSearchComponent implements OnInit, OnDestroy {
-  from = '';
+  from = 'Graz';
   to = 'Hamburg';
 
   minLength = 3;
@@ -23,6 +23,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   flightsSubscription: Subscription | undefined;
 
   selectedFlight: Flight | undefined | null;
+  flightToEdit: Flight | undefined | null;
 
   message = '';
 
@@ -82,7 +83,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     this.selectedFlight = f;
   }
 
-  save(): void {
+  /*save(): void {
     if (this.selectedFlight) {
       this.flightService.save(this.selectedFlight).subscribe({
         next: (flight) => {
@@ -95,5 +96,5 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         }
       });
     }
-  }
+  }*/
 }
