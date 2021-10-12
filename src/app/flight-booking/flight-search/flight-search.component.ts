@@ -11,7 +11,7 @@ import { share, takeUntil } from 'rxjs/operators';
   styleUrls: ['./flight-search.component.css']
 })
 export class FlightSearchComponent implements OnInit, OnDestroy {
-  from = 'Graz';
+  from = '';
   to = 'Hamburg';
 
   flights: Flight[] = [];
