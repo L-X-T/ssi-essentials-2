@@ -56,6 +56,8 @@
         <button
           (click)="search()"
           class="btn btn-default">Search</button>
+
+        <button [disabled]="flights.length === 0" (click)="delayFirstFlight()" class="btn btn-default">Delay first flight</button>
       </div>
     </form>
   </div>
