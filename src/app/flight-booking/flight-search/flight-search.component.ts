@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { Flight } from '../../entities/flight';
-import { FlightService } from './flight.service';
+import { FlightService } from '../shared/services/flight.service';
 
 import { Observable, Observer, Subject, Subscription } from 'rxjs';
 import { share, takeUntil } from 'rxjs/operators';

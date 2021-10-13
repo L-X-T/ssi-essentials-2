@@ -3,7 +3,7 @@ import { AbstractControl, AsyncValidatorFn, ValidationErrors } from '@angular/fo
 import { Observable } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
 
-import { FlightService } from '../../flight-search/flight.service';
+import { FlightService } from '../services/flight.service';
 
 export const validateAsyncCity =
   (flightService: FlightService): AsyncValidatorFn =>

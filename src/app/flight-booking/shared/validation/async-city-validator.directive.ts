@@ -4,7 +4,7 @@ import { AbstractControl, AsyncValidator, NG_ASYNC_VALIDATORS, ValidationErrors 
 import { Observable } from 'rxjs';
 import { map, delay } from 'rxjs/operators';
 
-import { FlightService } from '../../flight-search/flight.service';
+import { FlightService } from '../services/flight.service';
 
 @Directive({
   selector: 'input[asyncCity]',
