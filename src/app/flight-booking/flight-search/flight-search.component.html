@@ -148,7 +148,8 @@
      </app-flight-card>-->
     <app-flight-card [item]="f"
                      [(isSelected)]="basket[f.id]"
-                     (isSelectedChange)="$event ? selectedFlight = f : selectedFlight = null">
+                     (isSelectedChange)="$event ? selectedFlight = f : selectedFlight = null"
+                     (edit)="onEdit(f.id)">
       <app-flight-status-toggle style="margin-left: 10px" [(isDelayed)]="f.delayed"></app-flight-status-toggle>
     </app-flight-card>
   </div>

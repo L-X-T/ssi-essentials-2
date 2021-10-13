@@ -8,6 +8,8 @@ import { Observable, Observer, Subject, Subscription } from 'rxjs';
 import { share, takeUntil } from 'rxjs/operators';
 import { pattern } from '../../shared/global';
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-flight-search',
   templateUrl: './flight-search.component.html',
@@ -39,7 +41,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
   @ViewChild('flightSearchForm') flightSearchForm: FormGroup | undefined;
 
-  constructor(private flightService: FlightService) {}
+  constructor(private flightService: FlightService, private router: Router) {}
 
   ngOnInit(): void {
     if (this.from && this.to) {
@@ -106,5 +108,9 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     // console.log(updatedFlight);
 
     this.flights = this.flights.map((flight) => (flight.id === updatedFlight.id ? updatedFlight : flight));
+  }
+
+  onEdit(id: number): void {
+    this.router.navigate(['/flight-edit', id, { showDetails: true }]);
   }
 }

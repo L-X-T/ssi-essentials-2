@@ -4,7 +4,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, delay, distinctUntilChanged } from 'rxjs/operators';
 
 import { Flight } from '../../entities/flight';
 import { FlightService } from '../shared/services/flight.service';
@@ -96,10 +96,15 @@ export class FlightEditComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   save(): void {
-    this.flightService.save(this.editForm.value).subscribe({
-      next: (flight) => {
-        // console.warn('FlightEditComponent - save()');
-        // console.log(flight);
+    this.message = 'Is saving ...';
+
+    this.flightService
+      .save(this.editForm.value)
+      .pipe(delay(3000))
+      .subscribe({
+        next: (flight) => {
+          // console.warn('FlightEditComponent - save()');
+          // console.log(flight);
 
           // this.flight.date = flight.date;
           // this.flight.delayed = flight.delayed;

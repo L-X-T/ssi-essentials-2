@@ -18,9 +18,7 @@
 
       <ng-content select=".bottom"></ng-content>
 
-      <button class="btn btn-default" [routerLink]="['/flight-edit', item.id, { showDetails: true }]">
-        Edit
-      </button>
+      <a class="btn btn-default" (click)="edit.emit()">Edit</a>
     </p>
   </div>
 </div>
