@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { Subscription } from 'rxjs';
@@ -67,7 +67,7 @@ export class FlightEditComponent implements OnChanges, OnInit, OnDestroy {
   private valueChangesSubscription: Subscription | undefined;
   private saveFlightSubscription: Subscription | undefined;
 
-  constructor(private fb: FormBuilder, private flightService: FlightService, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private flightService: FlightService, private route: ActivatedRoute, private router: Router) {
     this.editForm.validator = validateRoundTrip;
   }
 
@@ -96,28 +96,30 @@ export class FlightEditComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   save(): void {
-    this.saveFlightSubscription = this.flightService.save(this.editForm.value).subscribe({
+    this.flightService.save(this.editForm.value).subscribe({
       next: (flight) => {
         // console.warn('FlightEditComponent - save()');
         // console.log(flight);
 
-        // this.flight.date = flight.date;
-        // this.flight.delayed = flight.delayed;
-        // this.flight.from = flight.from;
-        // this.flight.id = flight.id;
-        // this.flight.to = flight.to;
+          // this.flight.date = flight.date;
+          // this.flight.delayed = flight.delayed;
+          // this.flight.from = flight.from;
+          // this.flight.id = flight.id;
+          // this.flight.to = flight.to;
 
-        this.flightChange.emit(flight);
+          this.flightChange.emit(flight);
 
-        this.flight = flight;
-        this.message = 'Success saving!';
-        this.patchFormValue();
-      },
-      error: (err: HttpErrorResponse) => {
-        console.error('Error', err);
-        this.message = 'Error saving!';
-      }
-    });
+          this.flight = flight;
+          this.message = 'Success saving! Navigating ...';
+          this.patchFormValue();
+
+          setTimeout(() => this.router.navigate(['/flight-search']), 3000);
+        },
+        error: (err: HttpErrorResponse) => {
+          console.error('Error', err);
+          this.message = 'Error saving!';
+        }
+      });
   }
 
   private patchFormValue(): void {
