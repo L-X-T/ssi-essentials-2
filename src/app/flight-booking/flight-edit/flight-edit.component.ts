@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+
 import { HttpErrorResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
-
 import { Flight } from '../../entities/flight';
 import { FlightService } from '../flight-search/flight.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -19,6 +20,10 @@ import { pattern } from '../../shared/global';
 export class FlightEditComponent implements OnChanges, OnInit, OnDestroy {
   @Input() flight: Flight | undefined | null;
   @Output() flightChange = new EventEmitter<Flight>();
+
+  debug = true;
+  id = '';
+  showDetails = '';
 
   pattern = pattern;
 
@@ -61,7 +66,7 @@ export class FlightEditComponent implements OnChanges, OnInit, OnDestroy {
   private valueChangesSubscription: Subscription | undefined;
   private saveFlightSubscription: Subscription | undefined;
 
-  constructor(private fb: FormBuilder, private flightService: FlightService) {
+  constructor(private fb: FormBuilder, private flightService: FlightService, private route: ActivatedRoute) {
     this.editForm.validator = validateRoundTrip;
   }
 
@@ -80,6 +85,11 @@ export class FlightEditComponent implements OnChanges, OnInit, OnDestroy {
       .subscribe((value) => {
         console.log(value);
       });
+
+    this.route.params.subscribe((params) => {
+      this.id = params['id'];
+      this.showDetails = params['showDetails'];
+    });
   }
 
   ngOnDestroy(): void {
