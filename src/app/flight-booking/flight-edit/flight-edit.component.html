@@ -33,6 +33,8 @@
                             [errors]="editForm.controls.date.errors">
   </flight-validation-errors>
 
+  <div *ngIf="editForm.hasError('roundTrip')" class="text-danger">Round trips are not allowed!</div>
+
   <div class="form-group">
     <button (click)="save()" class="btn btn-default">Save</button>
   </div>
