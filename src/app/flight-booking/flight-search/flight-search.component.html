@@ -4,7 +4,7 @@
   </div>
 
   <div class="content">
-    <form #flightSearchForm="ngForm" roundTrip>
+    <form #flightSearchForm="ngForm" [roundTrip]="['from','to']">
       <div class="form-group">
         <label>From:</label>
         <input [(ngModel)]="from"
