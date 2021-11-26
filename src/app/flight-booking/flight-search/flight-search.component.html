@@ -184,4 +184,4 @@
   <button (click)="save()" class="btn btn-default">Save</button>
 </ng-container>-->
 
-<flight-edit [flight]="flightToEdit"></flight-edit>
+<flight-edit [flight]="flightToEdit" (flightChange)="updateFlight($event)"></flight-edit>
