@@ -48,10 +48,9 @@
 
       <div *ngIf="flightSearchForm.pending">... Executing Async Multi Field Validator ...</div>
 
-      <div *ngIf="flightSearchForm.hasError('roundTrip')" style="color: #b30000">Round trips are not allowed!</div>
-      <div *ngIf="flightSearchForm.hasError('asyncMulti')" style="color: #b30000">
-        No trips were found from {{ flightSearchForm.controls.from.value }} to {{ flightSearchForm.controls.to.value  }}!
-      </div>
+      <flight-validation-errors fieldLabel="Form"
+                                [errors]="flightSearchForm.errors">
+      </flight-validation-errors>
 
       <div class="form-group">
         <button

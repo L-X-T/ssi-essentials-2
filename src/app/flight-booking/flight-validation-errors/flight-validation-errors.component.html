@@ -10,4 +10,10 @@
   <div *ngIf="errors.pattern">{{ fieldLabel }} has invalid input.</div>
 
   <div *ngIf="errors.city"> {{ fieldLabel }} is {{ errors.city.actualCity }} but should be a city of {{ errors.city.validCities }} </div>
+
+  <div *ngIf="errors.roundTrip"> Round trips are not allowed!</div>
+
+  <div *ngIf="errors.asyncMulti">
+    No trips were found from {{ errors.from }} to {{ errors.to }}!
+  </div>
 </ng-container>
