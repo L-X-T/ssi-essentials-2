@@ -3,17 +3,20 @@ describe('misc e2e tests', () => {
     cy.visit('');
   });
 
-  it('should do an explicit subject assertion', () => {
-    cy.visit('/flight-booking/flight-search');
-    cy.get('form .btn').should(($button) => {
-      expect($button).to.have.attr('disabled', 'disabled');
-    });
-    cy.get('form input[name="from"]').clear();
-    cy.get('form input[name="from"]').type('Graz');
-    cy.get('form input[name="to"]').clear();
-    cy.get('form input[name="to"]').type('Hamburg');
-    cy.get('form .btn').should(($button) => {
-      expect($button).to.not.have.attr('disabled', 'disabled');
-    });
+  it('should load page below 1 second', () => {
+    cy.visit('/', {
+      onBeforeLoad: (win) => {
+        win.performance.mark('start-loading');
+      },
+      onLoad: (win) => {
+        win.performance.mark('end-loading');
+      }
+    })
+      .its('performance')
+      .then((p) => {
+        p.measure('pageLoad', 'start-loading', 'end-loading');
+        const measure = p.getEntriesByName('pageLoad')[0];
+        expect(measure.duration).to.be.most(1000);
+      });
   });
 });
