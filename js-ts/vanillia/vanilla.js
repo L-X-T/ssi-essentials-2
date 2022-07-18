@@ -66,8 +66,23 @@ class PersonClass {
 // forEach(myIntegers, (item) => alert(item));
 
 
-var rudi = new Person(47, 'Rudolf', 'Rentier');
+// var rudi = new Person(47, 'Rudolf', 'Rentier');
 // var rudi = new PersonClass(47, 'Rudolf', 'Rentier');
-console.log(rudi.firstname);
+/*console.log(rudi.firstname);
 console.log(rudi.lastname);
-console.log(rudi.fullName());
+console.log(rudi.fullName());*/
+
+
+// this
+forEach(myIntegers, function (item) {
+  console.debug(this); // caller (= forEach can set this)
+});
+
+var that = this;
+forEach(myIntegers, function (item) {
+  console.debug(that);
+});
+
+forEach(myIntegers, (item) => {
+  console.debug(this);
+});
