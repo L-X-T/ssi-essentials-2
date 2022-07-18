@@ -51,6 +51,18 @@ class PersonClass {
   }
 }
 
+function Employee(id, firstname, lastname, department) {
+  Person.call(this, id, firstname, lastname);
+  this.department = department;
+}
+
+Employee.prototype = new Person(this.id, this.firstname, this.lastname);
+Employee.prototype.switch = function (newDepartment) {
+  console.debug(this.fullName() + ' switches to ' + newDepartment);
+
+  this.department = newDepartment;
+};
+
 
 // <Main>
 
@@ -89,7 +101,7 @@ forEach(myIntegers, (item) => {
 
 
 // exception / error
-forEach('test', 'test');
+// forEach('test', 'test');
 
 /*try {
   console.debug('trying...');
@@ -100,3 +112,9 @@ forEach('test', 'test');
   console.debug('...finally done :-)');
 }*/
 
+
+// prototyping
+const em = new Employee(1, 'Max', 'Muster', 'Management');
+console.debug('Employee', em);
+em.switch('Dev');
+console.debug('After switch', em);
