@@ -114,15 +114,18 @@ forEach(myIntegers, (item) => {
 
 
 // prototyping
-const em = new Employee(1, 'Max', 'Muster', 'Management');
+/*const em = new Employee(1, 'Max', 'Muster', 'Management');
 console.debug('Employee', em);
 em.switch('Dev');
-console.debug('After switch', em);
+console.debug('After switch', em);*/
 
 
 // spreading
-const em2 = { ...em, firstname: 'Maria' };
+/*const em2 = { ...em, firstname: 'Maria' };
 console.debug('Employee 2', em2);
 
 const myIntegersExtended = [...myIntegers, 4];
-console.debug(myIntegersExtended);
+console.debug(myIntegersExtended);*/
+
+// async
+loadDataFromAPI();
