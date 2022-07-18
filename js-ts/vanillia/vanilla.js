@@ -25,11 +25,37 @@ function showAlert(item) {
 
 const myIntegers = [1, 2, 3];
 
+// OO
+function Person(id, firstname, lastname) {
+  this.firstname = firstname;
+  this.lastname = lastname;
+
+  this.fullName = function () {
+    return id + ': ' + this.firstname + ' ' + this.lastname;
+  };
+}
+
+class PersonClass {
+  id;
+  firstname;
+  lastname;
+
+  constructor(id, firstname, lastname) {
+    this.id = id;
+    this.firstname = firstname;
+    this.lastname = lastname;
+  }
+
+  fullName() {
+    return this.id + ': ' + this.firstname + ' ' + this.lastname;
+  }
+}
+
 
 // <Main>
 
 // classic
-forEach(myIntegers, showAlert);
+// forEach(myIntegers, showAlert);
 
 // pass a function as parameter
 /*forEach(myIntegers, function (item) {
@@ -38,3 +64,10 @@ forEach(myIntegers, showAlert);
 
 // pass a function as lambda
 // forEach(myIntegers, (item) => alert(item));
+
+
+var rudi = new Person(47, 'Rudolf', 'Rentier');
+// var rudi = new PersonClass(47, 'Rudolf', 'Rentier');
+console.log(rudi.firstname);
+console.log(rudi.lastname);
+console.log(rudi.fullName());
