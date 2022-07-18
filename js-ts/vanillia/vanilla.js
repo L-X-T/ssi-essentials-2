@@ -74,7 +74,7 @@ console.log(rudi.fullName());*/
 
 
 // this
-forEach(myIntegers, function (item) {
+/*forEach(myIntegers, function (item) {
   console.debug(this); // caller (= forEach can set this)
 });
 
@@ -85,4 +85,18 @@ forEach(myIntegers, function (item) {
 
 forEach(myIntegers, (item) => {
   console.debug(this);
-});
+});*/
+
+
+// exception / error
+forEach('test', 'test');
+
+/*try {
+  console.debug('trying...');
+  forEach('test', 'test');
+} catch (e) {
+  console.warn(e);
+} finally {
+  console.debug('...finally done :-)');
+}*/
+
