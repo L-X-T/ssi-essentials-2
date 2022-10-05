@@ -8,6 +8,7 @@
       <div class="form-group">
         <label>From:</label>
         <input [(ngModel)]="from"
+               [ngModelOptions]="{ updateOn: 'blur' }"
                autocomplete="false"
                name="from"
                class="form-control"
@@ -17,7 +18,7 @@
                pattern="[a-zA-ZäöüÄÖÜß ]*">
       </div>
 
-      <flight-validation-errors *ngIf="flightSearchForm.controls.from"
+      <flight-validation-errors *ngIf="flightSearchForm.controls.from?.dirty"
                                 [errors]="flightSearchForm.controls.from.errors"
                                 fieldLabel="From">
       </flight-validation-errors>
@@ -25,6 +26,7 @@
       <div class="form-group">
         <label>To:</label>
         <input [(ngModel)]="to"
+               [ngModelOptions]="{ updateOn: 'blur' }"
                name="to"
                class="form-control"
                required="required"
@@ -33,14 +35,13 @@
                pattern="[a-zA-ZäöüÄÖÜß ]*">
       </div>
 
-      <flight-validation-errors *ngIf="flightSearchForm.controls.from"
+      <flight-validation-errors *ngIf="flightSearchForm.controls.to?.dirty"
                                 [errors]="flightSearchForm.controls.to.errors"
                                 fieldLabel="To">
       </flight-validation-errors>
 
       <div class="form-group">
         <button
-          [disabled]="!to || !from || flightSearchForm.invalid"
           (click)="search()"
           class="btn btn-default">Search</button>
       </div>
