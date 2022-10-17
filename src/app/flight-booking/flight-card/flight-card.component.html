@@ -1,6 +1,7 @@
 <!--<div *ngIf="item" class="card" [ngStyle]="{'background-color': (isSelected) ? 'rgb(204, 197, 185)' : 'white' }">-->
 <div *ngIf="item" class="card" [style.background-color]="(isSelected) ? 'rgb(204, 197, 185)' : 'white'">
   <div class="header">
+    <ng-content select=".top"></ng-content>
     <h2 class="title">{{ item.from }} - {{ item.to }}</h2>
   </div>
 
@@ -15,7 +16,7 @@
         Deselect
       </button>
 
-      <app-flight-status-toggle style="margin-left: 10px" [(isDelayed)]="item.delayed"></app-flight-status-toggle>
+      <ng-content select=".bottom"></ng-content>
     </p>
   </div>
 </div>
