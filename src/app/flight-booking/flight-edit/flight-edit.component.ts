@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 
 import { Flight } from '../../entities/flight';
 import { FlightService } from '../flight-search/flight.service';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'flight-edit',
@@ -35,9 +36,14 @@ export class FlightEditComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.valueChangesSubscription = this.editForm.valueChanges.subscribe((value) => {
-      console.log(value);
-    });
+    this.valueChangesSubscription = this.editForm.valueChanges
+      .pipe(
+        debounceTime(250),
+        distinctUntilChanged((a, b) => a.id === b.id && a.from === b.from && a.to === b.to && a.date === b.date)
+      )
+      .subscribe((value) => {
+        console.log(value);
+      });
   }
 
   ngOnDestroy(): void {
