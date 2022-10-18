@@ -9,6 +9,8 @@
     <input formControlName="from" class="form-control">
   </div>
 
+  <div *ngIf="editForm.controls.from.pending" class="text-danger">Checking city ...</div>
+
   <flight-validation-errors fieldLabel="From"
                             [errors]="editForm.controls.from.errors">
   </flight-validation-errors>
